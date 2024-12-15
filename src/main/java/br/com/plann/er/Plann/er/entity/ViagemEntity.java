@@ -31,7 +31,10 @@ public class ViagemEntity {
     private String country;
 
     @NotNull
-    private LocalDate date;
+    private LocalDate departureDate;
+
+    @NotNull
+    private LocalDate returnDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

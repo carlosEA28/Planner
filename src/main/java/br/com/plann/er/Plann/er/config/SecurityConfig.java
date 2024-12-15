@@ -26,10 +26,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/redeem-password").hasAuthority(Role.USER.toString())
-                        .requestMatchers(HttpMethod.POST, "/user/reset-password").hasAuthority(String.valueOf(Role.USER))
+                        .requestMatchers(HttpMethod.POST, "/user/redeem-password").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/user/reset-password").permitAll()
                 ).oauth2ResourceServer(config -> config.jwt(jwt -> jwt.decoder(jwtConfig.jwtDecoder())));
 
         return http.build();
     }
 }
+//ARRUMAR OS ROLES E TIRAR DO PERMIT ALL

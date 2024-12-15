@@ -7,6 +7,7 @@ import br.com.plann.er.Plann.er.dto.LoginResponseDto;
 import br.com.plann.er.Plann.er.dto.UserDto;
 import br.com.plann.er.Plann.er.dto.UserResetPasswordDto;
 import br.com.plann.er.Plann.er.entity.UserEntity;
+import br.com.plann.er.Plann.er.entity.ViagemEntity;
 import br.com.plann.er.Plann.er.exceptions.UserAlreadyExists;
 import br.com.plann.er.Plann.er.exceptions.UserNotFound;
 import br.com.plann.er.Plann.er.repository.UserRepository;
@@ -112,4 +113,7 @@ public class UserService {
 
         userRepository.save(customer);
     }
+//
+//    public ViagemEntity createTrip() {
+//    }
 }

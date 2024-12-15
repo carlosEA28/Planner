@@ -33,7 +33,7 @@ public class JwtActions {
                 .issuer("planner")
                 .subject(String.valueOf(user.getUserId()))
                 .issuedAt(now)
-                .claim("role", role)
+                .claim("role", role.name())
                 .expiresAt(now.plusSeconds(expiresIn))
                 .build();
 
