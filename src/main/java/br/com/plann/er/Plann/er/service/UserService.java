@@ -2,10 +2,7 @@ package br.com.plann.er.Plann.er.service;
 
 import br.com.plann.er.Plann.er.Enums.Role;
 import br.com.plann.er.Plann.er.domains.EmailService;
-import br.com.plann.er.Plann.er.dto.LoginDto;
-import br.com.plann.er.Plann.er.dto.LoginResponseDto;
-import br.com.plann.er.Plann.er.dto.UserDto;
-import br.com.plann.er.Plann.er.dto.UserResetPasswordDto;
+import br.com.plann.er.Plann.er.dto.*;
 import br.com.plann.er.Plann.er.entity.UserEntity;
 import br.com.plann.er.Plann.er.entity.ViagemEntity;
 import br.com.plann.er.Plann.er.exceptions.UserAlreadyExists;
@@ -20,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -57,10 +56,10 @@ public class UserService {
     }
 
     public LoginResponseDto loginUser(LoginDto dto) {
-        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid email"));
+        var user = userRepository.findByEmail(dto.email()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email inválido"));
 
         if (!bCryptPasswordEncoder.matches(dto.password(), user.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Senha incorreta");
         }
 
         return jwtActions.jwtCreate(dto);
@@ -113,7 +112,4 @@ public class UserService {
 
         userRepository.save(customer);
     }
-//
-//    public ViagemEntity createTrip() {
-//    }
 }

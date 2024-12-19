@@ -5,5 +5,5 @@ import java.util.Date;
 import java.util.Set;
 
 public record ViagemDto(String city, String country, LocalDate departureDate, LocalDate returnDate,
-                        Set<String> emails) {
+                        Set<String> emails, String userId) {
 }
