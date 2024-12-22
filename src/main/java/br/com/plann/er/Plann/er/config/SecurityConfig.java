@@ -23,16 +23,17 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/user").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/redeem-password").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/reset-password").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/viagem/create").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/viagem/update/{viagemId}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user/redeem-password").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user/reset-password").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/viagem/create").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/viagem/update/{viagemId}").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/link/create/{viagemId}").permitAll()
+                        //ARRUMAR OS ROLES E TIRAR DO PERMIT ALL
                 ).oauth2ResourceServer(config -> config.jwt(jwt -> jwt.decoder(jwtConfig.jwtDecoder())));
 
         return http.build();
     }
 }
-//ARRUMAR OS ROLES E TIRAR DO PERMIT ALL
