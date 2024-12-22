@@ -29,4 +29,36 @@ public class LinkEntity {
     @ManyToOne
     @JoinColumn(name = "viagem_id")
     private ViagemEntity viagem;
+
+    public UUID getLinkId() {
+        return linkId;
+    }
+
+    public void setLinkId(UUID linkId) {
+        this.linkId = linkId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public ViagemEntity getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(ViagemEntity viagem) {
+        this.viagem = viagem;
+    }
 }
