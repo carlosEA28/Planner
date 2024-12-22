@@ -31,6 +31,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/viagem/create").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/viagem/update/{viagemId}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/link/create/{viagemId}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/link/{viagemId}").permitAll()
                         //ARRUMAR OS ROLES E TIRAR DO PERMIT ALL
                 ).oauth2ResourceServer(config -> config.jwt(jwt -> jwt.decoder(jwtConfig.jwtDecoder())));
 
