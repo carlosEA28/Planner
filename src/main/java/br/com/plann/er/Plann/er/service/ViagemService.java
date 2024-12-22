@@ -1,8 +1,7 @@
 package br.com.plann.er.Plann.er.service;
 
+import br.com.plann.er.Plann.er.dto.UpdateViagemDto;
 import br.com.plann.er.Plann.er.dto.ViagemDto;
-import br.com.plann.er.Plann.er.entity.ConvidadoEntity;
-import br.com.plann.er.Plann.er.entity.UserEntity;
 import br.com.plann.er.Plann.er.entity.ViagemEntity;
 import br.com.plann.er.Plann.er.exceptions.UserNotFound;
 import br.com.plann.er.Plann.er.mail.MailService;
@@ -11,14 +10,10 @@ import br.com.plann.er.Plann.er.repository.ViagemRepository;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class ViagemService {
@@ -57,6 +52,29 @@ public class ViagemService {
         }
 
         return viagem;
+    }
+
+    public void updateTrip(String viagemId, UpdateViagemDto updateViagemDto) {
+        var viagemExists = viagemRepository.findById(UUID.fromString(viagemId))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Viagem não encontrada"));
+
+        if (updateViagemDto.city() != null && !updateViagemDto.city().isBlank()) {
+            viagemExists.setCity(updateViagemDto.city());
+        }
+
+        if (updateViagemDto.country() != null && !updateViagemDto.country().isBlank()) {
+            viagemExists.setCountry(updateViagemDto.country());
+        }
+
+        if (updateViagemDto.departureDate() != null) {
+            viagemExists.setDepartureDate(updateViagemDto.departureDate());
+        }
+
+        if (updateViagemDto.returnDate() != null) {
+            viagemExists.setReturnDate(updateViagemDto.returnDate());
+        }
+
+        viagemRepository.save(viagemExists);
     }
 
 }

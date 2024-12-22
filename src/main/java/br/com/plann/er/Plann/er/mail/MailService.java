@@ -44,7 +44,5 @@ public class MailService {
         helper.setText(htmlContent, true);
 
         javaMailSender.send(message);
-
-//        String confirmationLink COLOCAR DPS NOS PARAMETROS DA FUNC
     }
 }

@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/user/redeem-password").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user/reset-password").permitAll()
                         .requestMatchers(HttpMethod.POST, "/viagem/create").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/viagem/update/{viagemId}").permitAll()
                 ).oauth2ResourceServer(config -> config.jwt(jwt -> jwt.decoder(jwtConfig.jwtDecoder())));
 
         return http.build();
