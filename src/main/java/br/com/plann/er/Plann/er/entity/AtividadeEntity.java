@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -24,6 +25,8 @@ public class AtividadeEntity {
 
     @NotBlank(message = "The field [atividadeName] cannot be empty")
     private String atividadeName;
+
+    private LocalDate data;
 
     private Boolean isDone;
 
