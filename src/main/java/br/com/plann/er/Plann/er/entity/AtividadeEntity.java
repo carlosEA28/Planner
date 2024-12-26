@@ -14,8 +14,8 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Table(name = "TB_ATIVIDADE")
 public class AtividadeEntity {
 
@@ -35,4 +35,55 @@ public class AtividadeEntity {
     @ManyToOne
     @JoinColumn(name = "viagem_id")
     private ViagemEntity viagem;
+
+    public UUID getAtividadeId() {
+        return atividadeId;
+    }
+
+    public void setAtividadeId(UUID atividadeId) {
+        this.atividadeId = atividadeId;
+    }
+
+    public String getAtividadeName() {
+        return atividadeName;
+    }
+
+    public void setAtividadeName(String atividadeName) {
+        this.atividadeName = atividadeName;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public Boolean getDone() {
+        return isDone;
+    }
+
+    public void setDone(Boolean done) {
+        isDone = done;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public ViagemEntity getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(ViagemEntity viagem) {
+        this.viagem = viagem;
+    }
+
+    public void setIsDone(boolean b) {
+    }
 }

@@ -42,9 +42,9 @@ public class ViagemEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @ElementCollection // é usado para mapear coleções simples como String, números ou objetos,coisas que não são entidadess
-    @CollectionTable(name = "viagem_convidados", joinColumns = @JoinColumn(name = "viagem_id"))
-    Set<String> convidados;
+
+    @OneToMany(mappedBy = "viagem", cascade = CascadeType.ALL)
+    private List<ConvidadoEntity> convidados;
 
     @OneToMany
     List<AtividadeEntity> atividades;
@@ -100,11 +100,11 @@ public class ViagemEntity {
         this.user = user;
     }
 
-    public Set<String> getConvidados() {
+    public List<ConvidadoEntity> getConvidados() {
         return convidados;
     }
 
-    public void setConvidados(Set<String> convidados) {
+    public void setConvidados(List<ConvidadoEntity> convidados) {
         this.convidados = convidados;
     }
 

@@ -31,4 +31,47 @@ public class ConvidadoEntity {
 
     private Boolean isConfirmed;
 
+    @ManyToOne
+    @JoinColumn(name = "viagem_id", nullable = false)
+    private ViagemEntity viagem;
+
+    public ViagemEntity getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(ViagemEntity viagem) {
+        this.viagem = viagem;
+    }
+
+    public UUID getConvidadoId() {
+        return convidadoId;
+    }
+
+    public void setConvidadoId(UUID convidadoId) {
+        this.convidadoId = convidadoId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        isConfirmed = confirmed;
+    }
 }

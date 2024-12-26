@@ -6,11 +6,9 @@ import br.com.plann.er.Plann.er.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,4 +45,11 @@ public class UserController {
 
         return ResponseEntity.ok().body(Map.of("message", "Credentials updated"));
     }
+
+    @GetMapping("/viagem/{viagemId}/convidados")
+    public ResponseEntity<List<ConvidadoDto>> getConvidadosPorViagem(@PathVariable String viagemId) {
+        List<ConvidadoDto> convidados = userService.getConvidados(viagemId);
+        return ResponseEntity.ok(convidados);
+    }
+
 }

@@ -3,21 +3,26 @@ package br.com.plann.er.Plann.er.service;
 import br.com.plann.er.Plann.er.Enums.Role;
 import br.com.plann.er.Plann.er.domains.EmailService;
 import br.com.plann.er.Plann.er.dto.*;
+import br.com.plann.er.Plann.er.entity.ConvidadoEntity;
 import br.com.plann.er.Plann.er.entity.UserEntity;
 import br.com.plann.er.Plann.er.entity.ViagemEntity;
 import br.com.plann.er.Plann.er.exceptions.UserAlreadyExists;
 import br.com.plann.er.Plann.er.exceptions.UserNotFound;
+import br.com.plann.er.Plann.er.repository.ConvidadoRepository;
 import br.com.plann.er.Plann.er.repository.UserRepository;
+import br.com.plann.er.Plann.er.repository.ViagemRepository;
 import br.com.plann.er.Plann.er.utils.JwtActions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -38,6 +43,12 @@ public class UserService {
 
     @Autowired
     private JwtActions jwtActions;
+
+    @Autowired
+    private ConvidadoRepository convidadoRepository;
+
+    @Autowired
+    private ViagemRepository viagemRepository;
 
 
     public UserEntity createUser(UserDto dto) {
@@ -112,4 +123,24 @@ public class UserService {
 
         userRepository.save(customer);
     }
+
+    public List<ConvidadoDto> getConvidados(String viagemId) {
+        UUID viagemUUID = UUID.fromString(viagemId);
+
+        // Busca os convidados relacionados à viagem
+        List<ConvidadoEntity> convidados = convidadoRepository.findByViagem_ViagemId(viagemUUID);
+
+        if (convidados.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum convidado encontrado para esta viagem");
+        }
+
+        return convidados.stream()
+                .map(convidado -> new ConvidadoDto(
+                        convidado.getName(),
+                        convidado.getEmail()
+                ))
+                .toList();
+    }
+
+
 }

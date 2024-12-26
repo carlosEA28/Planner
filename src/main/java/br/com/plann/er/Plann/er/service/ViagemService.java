@@ -41,7 +41,7 @@ public class ViagemService {
         viagem.setCountry(dto.country());
         viagem.setDepartureDate(dto.departureDate());
         viagem.setReturnDate(dto.returnDate());
-        viagem.setConvidados(dto.emails());
+//        viagem.setConvidados(dto.);
 
         viagem = viagemRepository.save(viagem);
 
